@@ -16,10 +16,10 @@
 ``` yml
 services:
   mihomo:
-    image: purewhiteicecream/mihomo_sub:latest
-    container_name: mihomo_sub
+    image: purewhiteicecream/mihomo-sub:latest
+    container_name: mihomo-sub
     volumes:
-      - /opt/mihomo_sub:/root/.config/mihomo
+      - /opt/mihomo-sub:/root/.config/mihomo
     environment:
       - "TZ=Asia/Shanghai"
       - "sub_url=https://这里换成你的订阅地址"
