@@ -52,10 +52,10 @@ jobs:
 
     # 构建镜像
     - name: Build the Docker image
-      run: docker build -t purewhiteicecream/mihomo_sub:${{ env.IMAGE_TAG }} -t purewhiteicecream/mihomo_sub:latest .
+      run: docker build -t purewhiteicecream/mihomo-sub:${{ env.IMAGE_TAG }} -t purewhiteicecream/mihomo-sub:latest .
 
     # 推送镜像
     - name: Push Docker image
       run: |
-        docker push purewhiteicecream/mihomo_sub:${{ env.IMAGE_TAG }}
-        docker push purewhiteicecream/mihomo_sub:latest
+        docker push purewhiteicecream/mihomo-sub:${{ env.IMAGE_TAG }}
+        docker push purewhiteicecream/mihomo-sub:latest
