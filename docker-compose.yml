@@ -1,0 +1,42 @@
+# 定义一个共享网络，多个服务单元可以加入
+networks:
+  proxy_shared_network:
+    name: proxy_shared_network
+    driver: bridge
+
+services: 
+  mihomo-sub-node1:
+    # image: purewhiteicecream/mihomo-sub:latest
+    build: .
+    container_name: mihomo-sub-node1
+    restart: unless-stopped
+    networks:
+      - proxy_shared_network
+    env_file:
+      - .env
+    volumes:
+      - ./mihomo-sub-node1:/root/.config/mihomo
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+     - "7891:7890"
+     - "9091:9090"
+     - "25501:25500"
+
+  mihomo-sub-node2:
+    # image: purewhiteicecream/mihomo-sub:latest
+    build: .
+    container_name: mihomo-sub-node2
+    restart: unless-stopped
+    networks:
+      - proxy_shared_network
+    env_file:
+      - .env
+    volumes:
+      - ./mihomo-sub-node2:/root/.config/mihomo
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+     - "7892:7890"
+     - "9092:9090"
+     - "25502:25500"

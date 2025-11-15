@@ -60,7 +60,9 @@ if [ -z "${encoded_url}" ]; then
 fi
 
 log="${log}[$(date +"%Y-%m-%d %H:%M:%S %z")] \n\t订阅文件更新...\n\t"
-sub_response=$(curl -s --max-time 15 -w "%{http_code}" -o /tmp/mihomo_temp.yml "http://127.0.0.1:25500/sub?target=clash&url=$encoded_url")
+log="${log}[$(date +"%Y-%m-%d %H:%M:%S %z")] \n\t encoded_url:$encoded_url  \n\t sub_url: $sub_url \n\t"
+# sub_response=$(curl -s --max-time 15 -w "%{http_code}" -o /tmp/mihomo_temp.yml "http://127.0.0.1:25500/sub?target=clash&url=$encoded_url")
+sub_response=$(curl -s --user-agent "clash-verge/v99.4.2" --max-time 15 -o /tmp/mihomo_temp.yml "$sub_url")
 sub_exit_code=$?
 
 if [ "${sub_exit_code}" -ne 0 ]; then
