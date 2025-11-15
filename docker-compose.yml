@@ -21,7 +21,6 @@ services:
     ports:
      - "7891:7890"
      - "9091:9090"
-     - "25501:25500"
 
   mihomo-sub-node2:
     # image: purewhiteicecream/mihomo-sub:latest
@@ -39,4 +38,3 @@ services:
     ports:
      - "7892:7890"
      - "9092:9090"
-     - "25502:25500"
