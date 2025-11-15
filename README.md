@@ -1,37 +1,23 @@
 # mihomo-sub
 
-- `docker` 部署的 `mihomo` 核心, 每小时更新和转换订阅
+# 使用
+· 复制.env.template文件为.evn
+· 修改需要的参数
 
-## 源码和仓库地址
-- 源码: `https://github.com/pure-white-ice-cream/mihomo-sub`
-- `Docker Hub`: `https://hub.docker.com/r/purewhiteicecream/mihomo-sub`
+## 订阅链接转换
 
-## 内置工具
-- `mihomo`
-- Web 面板 `metacubexd`
-- 本地订阅转换 `subconverter`
-- 定时更新订阅的脚本 `sub.sh`
-
-## 部署示例
-``` yml
+添加容器
+```docker-compose.yml
 services:
-  mihomo:
-    image: purewhiteicecream/mihomo-sub:latest
-    container_name: mihomo-sub
-    volumes:
-      - /opt/mihomo-sub:/root/.config/mihomo
-    environment:
-      - "TZ=Asia/Shanghai"
-      - "sub_url=https://这里换成你的订阅地址"
+  subconverter:
+    image: tindy2013/subconverter:latest
+    container_name: subconverter
+    restart: unless-stopped
     ports:
-     - "7890:7890"
-     - "9090:9090"
+      - "25500:25500"
 ```
 
-## 服务端口
-- 代理 `mixed` 端口: `7980`
-- Web 面板: `http://127.0.0.1:9090/ui`
-
-## 关键文件
-- `/root/.config/mihomo/config.yaml`: `mihomo` 核心的配置文件, 每小时自动更新
-- `/root/.config/mihomo/log.txt`: 每小时更新订阅的日志
+修改.evn订阅链接
+```sh
+SUBSCRIPTION_URL=http://subconverter:25500/sub?target=clash&url=你的原始订阅链接
+```

@@ -1,40 +1,65 @@
-# 定义一个共享网络，多个服务单元可以加入
+x-mihomo-config: &mihomo-config
+  build: 
+      context: .
+      dockerfile: Dockerfile.mihomo
+  restart: unless-stopped
+  environment:
+      - "TZ=Asia/Shanghai"
+  networks:
+    - proxy_shared_network
+  cap_add:
+    - NET_ADMIN
+  env_file:
+    - .env
+
+services:
+  # Mihomo 代理核心
+  mihomo-node-1:
+    <<: *mihomo-config
+    container_name: mihomo-node-1
+    ports:
+      - "${MIXED_PORT}:${MIXED_PORT}/tcp"
+      - "${API_PORT}:${API_PORT}/tcp"
+    volumes:
+      - ./mihomo-node-1/config:/root/.config/mihomo
+
+  # Mihomo 代理核心
+  mihomo-node-2:
+    <<: *mihomo-config
+    container_name: mihomo-node-2
+    ports:
+      - "7991:${MIXED_PORT}/tcp"
+      - "7992:${API_PORT}/tcp"
+    volumes:
+      - ./mihomo-node-2/config:/root/.config/mihomo
+
+  # Web 管理界面
+  mihomo-dashboard:
+    image: ghcr.io/metacubex/metacubexd:latest
+    container_name: mihomo-dashboard
+    restart: unless-stopped
+    networks:
+      - proxy_shared_network
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - "8011:80"
+    env_file:
+      - .env
+
+  # 订阅
+  subconverter:
+    image: tindy2013/subconverter:latest
+    container_name: subconverter
+    networks:
+      - proxy_shared_network
+    restart: unless-stopped
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - "25500:25500"
+
 networks:
   proxy_shared_network:
     name: proxy_shared_network
     driver: bridge
-
-services: 
-  mihomo-sub-node1:
-    # image: purewhiteicecream/mihomo-sub:latest
-    build: .
-    container_name: mihomo-sub-node1
-    restart: unless-stopped
-    networks:
-      - proxy_shared_network
-    env_file:
-      - .env
-    volumes:
-      - ./mihomo-sub-node1:/root/.config/mihomo
-    environment:
-      - "TZ=Asia/Shanghai"
-    ports:
-     - "7891:7890"
-     - "9091:9090"
-
-  mihomo-sub-node2:
-    # image: purewhiteicecream/mihomo-sub:latest
-    build: .
-    container_name: mihomo-sub-node2
-    restart: unless-stopped
-    networks:
-      - proxy_shared_network
-    env_file:
-      - .env
-    volumes:
-      - ./mihomo-sub-node2:/root/.config/mihomo
-    environment:
-      - "TZ=Asia/Shanghai"
-    ports:
-     - "7892:7890"
-     - "9092:9090"
