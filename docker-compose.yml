@@ -47,18 +47,6 @@ services:
     env_file:
       - .env
 
-  # 订阅链接转换服务
-  subconverter:
-    image: tindy2013/subconverter:latest
-    container_name: subconverter
-    networks:
-      - proxy_shared_network
-    restart: unless-stopped
-    environment:
-      - "TZ=Asia/Shanghai"
-    ports:
-      - "25500:25500"
-
 networks:
   proxy_shared_network:
     name: proxy_shared_network

@@ -1,7 +1,7 @@
 FROM metacubex/mihomo:latest
 
 # 安装必要工具（包括dos2unix用于处理Windows行尾符）
-RUN apk add --no-cache gettext bash dos2unix curl
+RUN apk add --no-cache gettext bash dos2unix curl ruby 
 
 # 复制配置模板
 COPY config.yaml.template /tmp/config.yaml.template
@@ -12,13 +12,22 @@ RUN dos2unix /usr/local/bin/generate-config.sh && \
     chmod +x /usr/local/bin/generate-config.sh && \
     echo "✓ 启动脚本已配置完成"
 
+COPY subscribe.sh /usr/local/bin/subscribe.sh
+RUN dos2unix /usr/local/bin/subscribe.sh && \
+    chmod +x /usr/local/bin/subscribe.sh && \
+    echo "✓ subscribe 脚本已配置完成"
+
 # 设置工作目录
 WORKDIR /root/.config/mihomo
 
 # 验证脚本存在且可执行
 RUN test -f /usr/local/bin/generate-config.sh && \
     test -x /usr/local/bin/generate-config.sh && \
-    echo "✓ 脚本验证成功"
+    echo "✓ generate-config脚本验证成功"
+
+RUN test -f /usr/local/bin/subscribe.sh && \
+    test -x /usr/local/bin/subscribe.sh && \
+    echo "✓ subscribe脚本验证成功"
 
 # 设置入口点
 ENTRYPOINT ["/usr/local/bin/generate-config.sh"]
