@@ -57,3 +57,23 @@ docker exec -e SUBSCRIPTION_URL="新的订阅链接" mihomo-node-1 /usr/local/bi
 # 方式3：带详细输出
 docker exec -it mihomo-node-1 /usr/local/bin/subscribe.sh
 ```
+
+## docker中使用
+在其他容器使用
+```yml
+services:
+    .....
+    networks:
+      - proxy_shared_network
+    .....
+
+networks:
+  proxy_shared_network:
+    external: true
+    name: proxy_shared_network
+```
+在上面的容器中测试
+```sh
+curl -x http://127.0.0.1:7890 https://www.google.com
+curl -x http://mihomo-node-1:7890 https://www.google.com
+```
