@@ -1,9 +1,9 @@
 # mihomo-sub
 
 ## 使用
-- 复制.env.template文件为.evn
+- 复制`.env.template`文件为`.evn`
 - 修改需要的参数
-- 默认部署两个核心，使用不同节点。不需要可以删除一个
+- 默认部署两个核心，使用不同节点。不需要可以在`docker-compose.yml`删除
 
 ## 服务默认端口
 - 代理 `mixed` 端口: `7890`
