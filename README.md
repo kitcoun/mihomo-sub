@@ -4,6 +4,12 @@
 - 复制`.env.template`文件为`.evn`
 - 修改需要的参数
 - 默认部署两个核心，使用不同节点。不需要可以在`docker-compose.yml`删除
+- 更改.env或者config.yaml.template等，需要重新编译镜像
+```yml
+docker-compose build
+
+docker-compose up -d 
+```
 
 ## 服务默认端口
 - 代理 `mixed` 端口: `7890`
