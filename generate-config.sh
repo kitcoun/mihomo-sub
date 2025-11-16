@@ -39,7 +39,7 @@ if [ "$ENABLE_SUBSCRIPTION" = "true" ] && [ -n "$SUBSCRIPTION_URL" ]; then
     export sub_url="$SUBSCRIPTION_URL"
     
     echo "✓ 执行首次订阅更新..."
-    if ./subscribe.sh; then
+    if /usr/local/bin/subscribe.sh; then
         echo "✓ 首次订阅更新成功"
     else
         echo "警告: 首次订阅更新失败，但继续启动..."
@@ -52,7 +52,7 @@ if [ "$ENABLE_SUBSCRIPTION" = "true" ] && [ -n "$SUBSCRIPTION_URL" ]; then
         # 创建 crontab 文件
         cat > /etc/crontabs/root << EOF
 # 订阅更新任务
-0 */${SUBSCRIPTION_UPDATE_INTERVAL} * * * /root/.config/mihomo/subscribe.sh >> /root/.config/mihomo/subscribe.log 2>&1
+0 */${SUBSCRIPTION_UPDATE_INTERVAL} * * * /usr/local/bin/subscribe.sh >> /root/.config/mihomo/subscribe.log 2>&1
 
 # 空行是必须的
 EOF
