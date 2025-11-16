@@ -36,7 +36,7 @@ subconverter:
         - "25500:25500"
 ```
 
-## 官方订阅
+## mihomo自带订阅
 添加到`config.yaml.template`文件。🛑 官方订阅会覆盖配置文件的所有设置
 ```yml
 proxy-providers:
@@ -52,7 +52,7 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
 ```
 
-## 手动执行订阅
+## 手动执行自定义订阅
 ```sh
 # 方式1：使用已设置的环境变量
 docker exec mihomo-node-1 /usr/local/bin/subscribe.sh
