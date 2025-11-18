@@ -14,7 +14,7 @@ docker-compose up -d
 ## 服务默认端口
 - 代理 `mixed` 端口: `7771`
 - Web 面板: `http://localhost:8011/ui`
-- Mihomo 代理核心 API: `http://localhost:9091`
+- Mihomo 代理核心 API: `http://localhost:9191`
 - 订阅链接转换: `http://localhost:25500`
 
 ## 订阅链接转换
