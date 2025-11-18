@@ -18,8 +18,8 @@ services:
     <<: *mihomo-config
     container_name: mihomo-node-1
     ports:
-      - "${MIXED_PORT}:${MIXED_PORT}/tcp"
-      - "${API_PORT}:${API_PORT}/tcp"
+      - "7771:${MIXED_PORT}"
+      - "9091:${API_PORT}"
     volumes:
       - ./mihomo-node-1/config:/root/.config/mihomo
 
@@ -28,8 +28,8 @@ services:
     <<: *mihomo-config
     container_name: mihomo-node-2
     ports:
-      - "7991:${MIXED_PORT}/tcp"
-      - "7992:${API_PORT}/tcp"
+      - "8881:${MIXED_PORT}"
+      - "9092:${API_PORT}"
     volumes:
       - ./mihomo-node-2/config:/root/.config/mihomo
 
@@ -38,8 +38,6 @@ services:
     image: ghcr.io/metacubex/metacubexd:latest
     container_name: mihomo-dashboard
     restart: unless-stopped
-    networks:
-      - proxy_shared_network
     environment:
       - "TZ=Asia/Shanghai"
     ports:
