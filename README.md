@@ -36,29 +36,27 @@ subconverter:
         - "25500:25500"
 ```
 
-## mihomo自带订阅
-添加到`config.yaml.template`文件。🛑 官方订阅会覆盖配置文件的所有设置
+## 已采用mihomo自带订阅
+因为官方订阅会覆盖配置文件的所有设置,所以放在`./providers/subscription.yaml`
+然后有会脚本去更新订阅到实际的配置文件
 ```yml
+# `config.yaml.template`文件
 proxy-providers:
   app:
     type: http
     url: "${SUBSCRIPTION_URL}"
-    interval: 3600
-    # path: ./providers/subscription.yaml
-    path: ./config.yaml
+    interval: ${SUBSCRIPTION_UPDATE_INTERVAL}
+    path: ./providers/subscription.yaml
     health-check:
       enable: true
       interval: 3000
       url: http://www.gstatic.com/generate_204
 ```
 
-## 手动执行自定义订阅
+## 手动更新订阅到实际的配置文件
 ```sh
 # 方式1：使用已设置的环境变量
 docker exec mihomo-node-1 /usr/local/bin/subscribe.sh
-
-# 方式2：临时指定订阅URL
-docker exec -e SUBSCRIPTION_URL="新的订阅链接" mihomo-node-1 /usr/local/bin/subscribe.sh
 
 # 方式3：带详细输出
 docker exec -it mihomo-node-1 /usr/local/bin/subscribe.sh

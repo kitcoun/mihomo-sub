@@ -6,3 +6,14 @@ log-level: info
 external-controller: 0.0.0.0:${API_PORT}
 external-ui: /root/.config/mihomo/ui
 secret: ${SECRET}
+
+proxy-providers:
+  app:
+    type: http
+    url: "${SUBSCRIPTION_URL}"
+    interval: ${SUBSCRIPTION_UPDATE_INTERVAL}
+    path: ./providers/subscription.yaml
+    health-check:
+      enable: true
+      interval: 3000
+      url: http://www.gstatic.com/generate_204
