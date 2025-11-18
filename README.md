@@ -80,5 +80,5 @@ networks:
 
 ```sh
 curl -x http://localhost:7771 https://www.google.com
-curl -x http://mihomo-node-1:7897 https://www.google.com
+curl -x http://mihomo-node-1:7890 https://www.google.com
 ```
