@@ -2,7 +2,7 @@
 
 CONFIG_DIR="/root/.config/mihomo"
 CONFIG_FILE="${CONFIG_DIR}/config.yaml"
-TEMP_FILE="/tmp/sub_temp.yaml"
+TEMP_FILE="${CONFIG_DIR}/sub_temp.yaml"
 LOG_FILE="${CONFIG_DIR}/log.txt"
 
 log="[$(date +"%Y-%m-%d %H:%M:%S")] "
@@ -11,6 +11,14 @@ echo "=== 调试信息 ==="
 echo "CONFIG_FILE: ${CONFIG_FILE}"
 echo "TEMP_FILE: ${TEMP_FILE}"
 echo "SUBSCRIPTION_URL: ${SUBSCRIPTION_URL}"
+
+http_code=$(curl -s --max-time 60 --user-agent "clash-meta-custom" -w "%{http_code}" -o /dev/null "${SUBSCRIPTION_URL}")
+
+if [ $? -ne 0 ] || [ "$http_code" != "200" ]; then
+    log="${log}❌ 订阅下载失败，HTTP状态码: ${http_code}\n"
+    printf "%b" "${log}" >> "${LOG_FILE}"
+    exit 1
+fi
 
 # 下载订阅
 curl -s --max-time 60 --user-agent "clash-meta-custom"  -o "${TEMP_FILE}" "${SUBSCRIPTION_URL}"
