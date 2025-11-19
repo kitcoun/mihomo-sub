@@ -13,10 +13,11 @@ echo "SUB_FILE: ${SUB_FILE}"
 echo "SUBSCRIPTION_URL: ${SUBSCRIPTION_URL}"
 
 # 订阅文件内容
-echo "=== 订阅文件内容 ==="
-cat "${SUB_FILE}"
-echo "=== 原配置内容 ==="
-cat "${CONFIG_FILE}"
+# echo "=== 订阅文件内容 ==="
+# cat "${SUB_FILE}"
+# echo "=== 原配置内容 ==="
+# cat "${CONFIG_FILE}"
+# cat ""
 
 ruby << EOF
 require 'yaml'
