@@ -4,7 +4,7 @@
 ## 使用
 - 复制`.env.template`文件为`.evn`
 - 修改需要的参数
-- 默认部署两个核心，使用不同节点。不需要可以在`docker-compose.yml`删除
+- 默认部署两个核心，不需要可以在`docker-compose.yml`删除
 - 更改.env、config.yaml.template等，需要重新编译镜像
 ```yml
 docker compose build
@@ -23,7 +23,7 @@ docker compose up -d
 ```sh
 SUBSCRIPTION_URL=http://subconverter:25500/sub?target=clash&url=你的订阅链接
 ```
-修改`docker-compose.yml`的订阅链接转换服务
+修改docker-compose.yml的订阅链接转换服务
 ```yml
 subconverter:
     image: tindy2013/subconverter:latest
