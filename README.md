@@ -6,9 +6,9 @@
 - 默认部署两个核心，使用不同节点。不需要可以在`docker-compose.yml`删除
 - 更改.env、config.yaml.template等，需要重新编译镜像
 ```yml
-docker-compose build
+docker compose build
 
-docker-compose up -d 
+docker compose up -d 
 ```
 
 ## 服务默认端口

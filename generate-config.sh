@@ -30,7 +30,8 @@ envsubst < /tmp/config.yaml.template > /root/.config/mihomo/config.yaml
 echo "✓ 配置文件已生成: /root/.config/mihomo/config.yaml"
 
 # 创建 crontab 文件
-UPDATE_CRON_MINUTES=$((SUBSCRIPTION_UPDATE_MINUTES / 60 + 1))
+UPDATE_CRON_MINUTES=$((SUBSCRIPTION_UPDATE_INTERVAL / 60 + 1))
+echo "更新间隔: $UPDATE_CRON_MINUTES 分钟"
 cat > /etc/crontabs/root << EOF
 # 自动更新订阅模板
 */${UPDATE_CRON_MINUTES} * * * * /usr/local/bin/subscribe.sh >> /root/.config/mihomo/subscribe.log 2>&1
@@ -41,6 +42,12 @@ EOF
 # 启动 crond 服务
 echo "✓ 启动 crond 服务..."
 crond -b -L /var/log/cron.log
+
+(
+    sleep 60    
+    echo "✓ 首次启动订阅配置更新..."
+    source /usr/local/bin/subscribe.sh
+) &
 
 # 如果提供了命令参数，则执行
 if [ "$#" -gt 0 ]; then
