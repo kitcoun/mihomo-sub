@@ -1,5 +1,5 @@
 # mihomo-sub
-来源于(MetaCubeX)[https://github.com/MetaCubeX]
+来源于[MetaCubeX](https://github.com/MetaCubeX)
 
 ## 使用
 - 复制`.env.template`文件为`.evn`
