@@ -13,6 +13,10 @@ proxy-providers:
     url: "${SUBSCRIPTION_URL}"
     interval: ${SUBSCRIPTION_UPDATE_INTERVAL}
     path: ./providers/subscription.yaml
+    # 添加重试限制
+    max-failed: 2
+    # 失败后的重试间隔（秒）
+    failed-interval: 600
     health-check:
       enable: true
       interval: 3000
