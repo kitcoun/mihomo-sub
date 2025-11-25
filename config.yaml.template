@@ -17,7 +17,3 @@ proxy-providers:
     max-failed: 2
     # 失败后的重试间隔（秒）
     failed-interval: 600
-    health-check:
-      enable: true
-      interval: 0
-      url: http://www.gstatic.com/generate_204

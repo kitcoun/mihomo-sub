@@ -24,14 +24,14 @@ services:
       - ./mihomo-node-1/config:/root/.config/mihomo
 
   # Mihomo 代理核心
-  mihomo-node-2:
-    <<: *mihomo-config
-    container_name: mihomo-node-2
-    ports:
-      - "0.0.0.0:8881:${MIXED_PORT}"
-      - "9192:${API_PORT}"
-    volumes:
-      - ./mihomo-node-2/config:/root/.config/mihomo
+  # mihomo-node-2:
+  #   <<: *mihomo-config
+  #   container_name: mihomo-node-2
+  #   ports:
+  #     - "0.0.0.0:8881:${MIXED_PORT}"
+  #     - "9192:${API_PORT}"
+  #   volumes:
+  #     - ./mihomo-node-2/config:/root/.config/mihomo
 
   # Web 管理界面
   mihomo-dashboard:
