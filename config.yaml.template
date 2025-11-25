@@ -5,7 +5,7 @@ mode: rule
 log-level: info
 external-controller: 0.0.0.0:${API_PORT}
 external-ui: /root/.config/mihomo/ui
-secret: ${SECRET}
+secret: "${SECRET}"
 
 proxy-providers:
   app:

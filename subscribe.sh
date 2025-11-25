@@ -56,7 +56,7 @@ end
 EOF
 
 # 重载配置
-curl -s -X PUT "http://localhost:${API_PORT}/configs?force=true" -H "Content-Type: application/json" -d '{"path":"","payload":""}' >/dev/null
+curl -s -X PUT "http://localhost:${API_PORT}/configs?force=true" -H "Content-Type: application/json" -H "Authorization: Bearer ${SECRET}"  -d '{"path":"","payload":""}' >/dev/null
 log="${log}✅ 配置重载完成\n"
 
 printf "%b" "${log}" >> "${LOG_FILE}"

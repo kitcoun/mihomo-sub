@@ -1,5 +1,5 @@
 # mihomo-sub
-来源于[MetaCubeX](https://github.com/MetaCubeX)
+[来源](https://github.com/MetaCubeX)
 
 ## 使用
 - 复制`.env.template`文件为`.evn`
@@ -7,9 +7,9 @@
 - 默认部署两个核心，不需要可以在`docker-compose.yml`删除
 - 更改.env、config.yaml.template等，需要重新编译镜像
 ```yml
-docker compose build
+docker compose build 
 
-docker compose up -d 
+docker compose up -d --force-recreate
 ```
 
 ## 服务默认端口
@@ -37,7 +37,7 @@ subconverter:
         - "25500:25500"
 ```
 
-## 已采用mihomo自带订阅
+## 已采用软件自带订阅
 因为官方订阅会覆盖配置文件的所有设置,所以放在`./providers/subscription.yaml`
 然后有会脚本去更新订阅到实际的配置文件
 ```yml

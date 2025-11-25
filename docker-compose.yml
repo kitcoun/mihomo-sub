@@ -18,7 +18,7 @@ services:
     <<: *mihomo-config
     container_name: mihomo-node-1
     ports:
-      - "0.0.0.0:7771:${MIXED_PORT}"
+      - "127.0.0.1:7771:${MIXED_PORT}"
       - "9191:${API_PORT}"
     volumes:
       - ./mihomo-node-1/config:/root/.config/mihomo
@@ -35,7 +35,7 @@ services:
 
   # Web 管理界面
   mihomo-dashboard:
-    image: ghcr.io/metacubex/metacubexd:latest
+    image: ghcr.io/metacubex/metacubexd:v1.202.1
     container_name: mihomo-dashboard
     restart: unless-stopped
     environment:
