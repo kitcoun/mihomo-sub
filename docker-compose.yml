@@ -1,4 +1,5 @@
 x-mihomo-config: &mihomo-config
+  image: ghcr.io/metacubex/mihomo:v1.4.3
   build: 
       context: .
       dockerfile: Dockerfile.mihomo

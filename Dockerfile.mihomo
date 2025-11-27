@@ -1,4 +1,4 @@
-FROM metacubex/mihomo:v1.19.16
+FROM ${sourceimage}:${sourcetag} AS builder
 
 # 安装必要工具（包括dos2unix用于处理Windows行尾符）
 RUN apk add --no-cache gettext bash dos2unix curl ruby 
